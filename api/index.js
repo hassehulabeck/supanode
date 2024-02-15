@@ -15,10 +15,10 @@ const supabaseUrl = process.env.CARS_PROJECT_URL
 
 const supabase = createClient(supabaseUrl, process.env.CARS_SUPABASE_KEY)
 
-const __dirname = path.dirname(url.fileURLToPath(import.meta.url));
-const filePath = path.join(__dirname, 'public/insert.html');
+// const __dirname = path.dirname(url.fileURLToPath(import.meta.url));
+// const filePath = path.join(__dirname, '../public/insert.html');
 
-app.use(express.static(path.join(__dirname, 'public')));
+// app.use(express.static(path.join(__dirname, '../public')));
 
 app.get('/api', (req, res) => {
   res.setHeader('Content-Type', 'text/html');
