@@ -1,12 +1,41 @@
 import express from 'express'
-import { data, error } from './cats.js'
+import path from 'path';
+import url from 'url';
+import bodyParser from "body-parser";
+import { createClient } from "@supabase/supabase-js";
+import { data, error } from './cars.js'
 
 const app = express()
 const port = 5000
 
+app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.json());
+
+const supabaseUrl = process.env.CARS_PROJECT_URL
+
+const supabase = createClient(supabaseUrl, process.env.CARS_SUPABASE_KEY)
+
+const __dirname = path.dirname(url.fileURLToPath(import.meta.url));
+const filePath = path.join(__dirname, 'public/insert.html');
+
+app.use(express.static(path.join(__dirname, 'public')));
+
 app.get('/', (req, res) => {
-    res.json(data)
-})
+  res.sendFile(filePath);
+});
+
+app.post('/cars', async (req, res) => {
+  const {error} = await supabase
+      .from('cars')
+      .insert({
+          group: req.body.group,
+          repo: req.body.repo
+      })
+  if (error) {
+      res.send(error);
+  }
+  res.send("created!!");
+});
 
 app.listen(port, () => {
     console.log(`Now listening on port ${port}`)
