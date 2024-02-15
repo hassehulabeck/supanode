@@ -20,6 +20,10 @@ const supabase = createClient(supabaseUrl, process.env.CARS_SUPABASE_KEY)
 
 // app.use(express.static(path.join(__dirname, '../public')));
 
+app.get('/', (req, res) => {
+  res.sendFile('index.html')
+})
+
 app.get('/api', (req, res) => {
   res.setHeader('Content-Type', 'text/html');
   res.setHeader('Cache-Control', 's-max-age=1, stale-while-revalidate');
