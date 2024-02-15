@@ -3,7 +3,7 @@ import path from 'path';
 import url from 'url';
 import bodyParser from "body-parser";
 import { createClient } from "@supabase/supabase-js";
-import { data, error } from './cars.js'
+import { data, error } from '../cars.js'
 
 const app = express()
 const port = 5000
@@ -20,11 +20,13 @@ const filePath = path.join(__dirname, 'public/insert.html');
 
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.get('/', (req, res) => {
+app.get('/api', (req, res) => {
+  res.setHeader('Content-Type', 'text/html');
+  res.setHeader('Cache-Control', 's-max-age=1, stale-while-revalidate');
   res.sendFile(filePath);
 });
 
-app.post('/cars', async (req, res) => {
+app.post('/api/cars', async (req, res) => {
   const {error} = await supabase
       .from('cars')
       .insert({
