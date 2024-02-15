@@ -23,7 +23,7 @@ const supabase = createClient(supabaseUrl, process.env.CARS_SUPABASE_KEY)
 app.get('/api', (req, res) => {
   res.setHeader('Content-Type', 'text/html');
   res.setHeader('Cache-Control', 's-max-age=1, stale-while-revalidate');
-  res.sendFile(filePath);
+  res.sendFile('insert.html');
 });
 
 app.post('/api/cars', async (req, res) => {
