@@ -1,9 +1,6 @@
 import express from 'express'
-import path from 'path';
-import url from 'url';
 import bodyParser from "body-parser";
 import { createClient } from "@supabase/supabase-js";
-import { data, error } from '../cars.js'
 
 const app = express()
 const port = 5000
@@ -14,11 +11,6 @@ app.use(bodyParser.json());
 const supabaseUrl = process.env.CARS_PROJECT_URL
 
 const supabase = createClient(supabaseUrl, process.env.CARS_SUPABASE_KEY)
-
-// const __dirname = path.dirname(url.fileURLToPath(import.meta.url));
-// const filePath = path.join(__dirname, '../public/insert.html');
-
-// app.use(express.static(path.join(__dirname, '../public')));
 
 app.get('/enter', async (req, res) => {
   const { data, error } = await supabase.auth.signInWithOAuth({
