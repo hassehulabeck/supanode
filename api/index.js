@@ -20,6 +20,15 @@ const supabase = createClient(supabaseUrl, process.env.CARS_SUPABASE_KEY)
 
 // app.use(express.static(path.join(__dirname, '../public')));
 
+app.get('/enter', async (req, res) => {
+  const { data, error } = await supabase.auth.signInWithOAuth({
+    provider: 'github',
+    options: {
+      redirectTo: '/'
+    }
+  })
+})
+  
 app.get('/', (req, res) => {
   res.sendFile('index.html')
 })
@@ -31,6 +40,7 @@ app.get('/api', (req, res) => {
 });
 
 app.post('/api/cars', async (req, res) => {
+
   const {error} = await supabase
       .from('cars')
       .insert({
