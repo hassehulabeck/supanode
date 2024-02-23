@@ -25,13 +25,13 @@ app.get('/', (req, res) => {
   res.sendFile('index.html')
 })
 
-app.get('/api', (req, res) => {
+app.get('/insert', (req, res) => {
   res.setHeader('Content-Type', 'text/html');
   res.setHeader('Cache-Control', 's-max-age=1, stale-while-revalidate');
   res.sendFile('insert.html');
 });
 
-app.post('/api/cars', async (req, res) => {
+app.post('/cars', async (req, res) => {
 
   const {error} = await supabase
       .from('cars')
