@@ -26,8 +26,8 @@ app.get('/', (req, res) => {
 })
 
 app.get('/insert', (req, res) => {
-  res.setHeader('Content-Type', 'text/html');
-  res.setHeader('Cache-Control', 's-max-age=1, stale-while-revalidate');
+  // res.setHeader('Content-Type', 'text/html');
+  // res.setHeader('Cache-Control', 's-max-age=1, stale-while-revalidate');
   res.sendFile('insert.html');
 });
 
