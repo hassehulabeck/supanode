@@ -22,13 +22,13 @@ app.get('/enter', async (req, res) => {
 })
   
 app.get('/', (req, res) => {
-  res.sendFile('index.html')
+  res.sendFile('indus.html')
 })
 
 app.get('/insert', (req, res) => {
   // res.setHeader('Content-Type', 'text/html');
   // res.setHeader('Cache-Control', 's-max-age=1, stale-while-revalidate');
-  res.sendFile('insert.html');
+  res.sendFile('./insert.html');
 });
 
 app.post('/cars', async (req, res) => {
